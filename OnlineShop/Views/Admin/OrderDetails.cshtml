@@ -1,0 +1,86 @@
+﻿@model OnlineShop.Models.OrderDetailsModel
+
+@{
+    ViewBag.Title = "Order details";
+    int counter = 1;
+}
+
+<div class="admin-manager">
+    <div class="manage-page-title">
+        Order details
+    </div>
+    <div class="order-center-content">
+        <div class="order-address-list">
+            <div class="order-address-name">Shipping Address:</div>
+            @{ Html.RenderPartial("_AddressPartial", Model.Address); }
+        </div>
+    </div>
+    <div class="order-item-title">
+        Order Date: @Model.OrderModel.DateCreated.ToShortDateString()
+    </div>
+    @if (Model.OrderModel.IsConfirm)
+    {
+        <div class="order-item-title">
+            Shipment date: @Convert.ToDateTime(Model.OrderModel.DateSend).ToShortDateString()
+        </div>
+    }
+    <div class="order-center-content">
+        <div class="order-item-title">
+            Ordered items:
+        </div>
+        <div class="order-item-list">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <td>
+                            №
+                        </td>
+                        <td>
+                            Name
+                        </td>
+                        <td>Amount</td>
+                        <td>
+                            Price
+                        </td>
+                    </tr>
+                </thead>
+                @foreach (var line in Model.OrderModel.OrderItems)
+                {
+                    <tr>
+                        <td>
+                            @(counter++)
+                        </td>
+                        <td>
+                            @line.Name
+                        </td>
+                        <td>
+                            @line.Count
+                        </td>
+                        <td>
+                            @line.Price
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div class="panel-footer">
+                <div class="row text-center">
+                    @if (Model.OrderModel.IsConfirm == false)
+                    {
+                        <div class="col-xs-8">
+                            <h4 class="text-right">Total: <strong>$@Model.OrderModel.ComputeTotalValue()</strong></h4>
+                        </div>
+                        <div class="col-xs-4">
+                            @Html.ActionLink("Process an order", "ChangeOrderStatus", "Admin", new { orderId = Model.OrderModel.OrderId }, new { @class = "btn btn-success btn-block" })
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-xs-12">
+                            <h4 class="text-right">Total: <strong>$@Model.OrderModel.ComputeTotalValue()</strong></h4>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

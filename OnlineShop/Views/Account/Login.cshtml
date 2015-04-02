@@ -1,0 +1,90 @@
+﻿@model OnlineShop.Models.LoginModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+@*@using (Html.BeginForm(new { returnUrl = ViewBag.ReturnUrl }))
+{
+    <div class="autorization-form">
+        @if (TempData["Message"] != null)
+        {
+            <div class="div alert alert-success">
+                @TempData["Message"]
+            </div>
+        }
+        <div class="message-error" id="error-message">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+        </div>
+        <div class="input-div">
+            @Html.TextBoxFor(m => m.Email, new { @id = "email", @class = "form-control input-lg", @placeholder = "Email address", @tabindex = "3" })
+        </div>
+        <div class="input-div">
+            @Html.PasswordFor(m => m.Password, new { @id = "password", @class = "form-control input-lg", @placeholder = "Password", @tabindex = "4" })
+        </div>
+        <div class="input-div">
+            @Html.CheckBoxFor(m => m.RememberMe)
+            @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox-name", @tabindex = "5" })
+            <div class="restore-passwords">
+                @Html.ActionLink("Forgot your password?", "ResetPassword", "Account", new { }, new { })
+            </div>
+        </div>
+        <div class="input-div">
+            <div class="btn-left">
+                <input type="submit" value="Login" class="btn btn-lg btn-success btn-block" tabindex="6" />
+            </div>
+            <div class="btn-right">
+                @Html.ActionLink("Register", "Register", "Account", new { }, new { @class = "btn btn-primary btn-block btn-lg" })
+            </div>
+        </div>
+    </div>
+}
+<div class="col-sm-8 col-sm-offset-1">
+    <div class="login-form">
+        <!--login form-->
+        <h2>Login to your account</h2>
+        <form action="#">
+            <input placeholder="Name" type="text">
+            <input placeholder="Email Address" type="email">
+            <span>
+                <input class="checkbox" type="checkbox">
+                Keep me signed in
+            </span>
+            <button type="submit" class="btn btn-default">Login</button>
+        </form>
+    </div><!--/login form-->
+</div>*@
+
+<div class="col-sm-8 col-sm-offset-1">
+    <div class="login-form">
+        <!--login form-->
+        <h2>Login to your account</h2>
+        @using (Html.BeginForm(new { returnUrl = ViewBag.ReturnUrl }))
+        {
+            if (TempData["Message"] != null)
+            {
+                <div class="div alert alert-success">
+                    @TempData["Message"]
+                </div>
+            }
+            <div class="message-error" id="error-message">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+            </div>
+            @Html.TextBoxFor(m => m.Email, new { @id = "email", @placeholder = "Email address", @tabindex = "3" })
+            @Html.PasswordFor(m => m.Password, new { @id = "password", @placeholder = "Password", @tabindex = "4" })
+    <span>
+        @Html.CheckBoxFor(m => m.RememberMe)
+        @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox-name", @tabindex = "5" })
+    </span>
+    <div class="restore-passwords">
+        @Html.ActionLink("Forgot your password?", "ResetPassword", "Account", new { }, new { })
+    </div>
+
+    <button type="submit" class="btn btn-default" style="display: inline;">Login</button>
+        @Html.ActionLink("Register", "Register", "Account", new { }, new { @class = "btn btn-success", @style = "border-radius:0; margin-top: 4%;" })
+    
+        }
+    </div><!--/login form-->
+</div>

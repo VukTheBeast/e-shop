@@ -1,0 +1,113 @@
+﻿@model OnlineShop.Logic.Entity.Address
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@{
+    ViewBag.Title = "Delivery Address";
+}
+
+<div class="manage-page">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="manage-page-title">
+            Delivery Address
+        </div>
+
+        <div class="address-content-edit">
+
+            @Html.HiddenFor(model => model.Id)
+            <div class="address-item-line">
+                <div class="address-info-edit">
+                    Name, Last name
+                </div>
+                <div class="address-data-edit">
+                    @Html.EditorFor(model => model.ContactName, new { @class = "form-control input-lg" })
+                </div>
+                <div class="address-error">
+                    @Html.ValidationMessageFor(model => model.ContactName)
+                </div>
+            </div>
+            <div class="address-item-line">
+                <div class="address-info-edit">
+                    Address
+                </div>
+                <div class="address-data-edit">
+                    @Html.EditorFor(model => model.Street)
+                </div>
+                <div class="address-error">
+                    @Html.ValidationMessageFor(model => model.Street)
+                </div>
+            </div>
+            <div class="address-item-line">
+                <div class="address-info-edit">
+                    City
+                </div>
+                <div class="address-data-edit">
+                    @Html.EditorFor(model => model.City)
+                </div>
+                <div class="address-error">
+                    @Html.ValidationMessageFor(model => model.City)
+                </div>
+            </div>
+            <div class="address-item-line">
+                <div class="address-info-edit">
+                    Country
+                </div>
+                <div class="address-data-edit">
+                    @Html.EditorFor(model => model.Country)
+                </div>
+                <div class="address-error">
+                    @Html.ValidationMessageFor(model => model.Country)
+                </div>
+            </div>
+            <div class="address-item-line">
+                <div class="address-info-edit">
+                    Area
+                </div>
+                <div class="address-data-edit">
+                    @Html.EditorFor(model => model.State)
+                </div>
+                <div class="address-error">
+                    @Html.ValidationMessageFor(model => model.State)
+                </div>
+            </div>
+            <div class="address-item-line">
+                <div class="address-info-edit">
+                    Postal Code
+                </div>
+                <div class="address-data-edit">
+                    @Html.EditorFor(model => model.PostalCode)
+                </div>
+                <div class="address-error">
+                    @Html.ValidationMessageFor(model => model.PostalCode)
+                </div>
+            </div>
+            <div class="address-item-line">
+                <div class="address-info-edit">
+                    Phone
+                </div>
+                <div class="address-data-edit">
+                    @Html.EditorFor(model => model.Telefon)
+                </div>
+                <div class="address-error">
+                    @Html.ValidationMessageFor(model => model.Telefon)
+                </div>
+            </div>
+            <div class="address-edit-row">
+                <div class="address-back">
+                    <a class="btn btn-primary btn-block" href="@Url.Action("Address", "Manage")">
+                        <span class="glyphicon glyphicon-share-alt"> </span> Back
+                    </a>
+                </div>
+                <div class="address-edit">
+                    <input type="submit" value="Save changes" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+
+    }
+
+</div>

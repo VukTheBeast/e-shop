@@ -1,0 +1,39 @@
+﻿@model OnlineShop.Logic.Entity.Product
+
+<div class="item">
+    <div class="photo-border">
+        <div class="photo">
+            <a href="@Url.Action("Details", "Product", new { id = Model.Id })">
+                <img src="@Model.Image" class="image" alt="a" />
+            </a>
+        </div>
+    </div>
+    <div class="info">
+        <div class="price">
+            <h5>
+                @Model.Name
+            </h5>
+            <h5 class="price-text-color">
+                $@Model.Price
+            </h5>
+        </div>
+        <div class="separator clear-left">
+            <div class="btn-add">
+                @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                {
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    @Html.ActionLink("Edit", "UpdateProduct", "Admin", new { productId = Model.Id, returnUrl = Request.Url.PathAndQuery }, new { })
+                }
+                else
+                {
+                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                    @Html.ActionLink(" Add to cart", "AddToCart", "Cart", new { Model.Id, returnUrl = Request.Url.PathAndQuery }, new { @class = "cart-btn-add" })
+                }
+            </div>
+            <div class="btn-details">
+                <span class="glyphicon glyphicon-list"></span>
+                @Html.ActionLink(" Details", "Details", "Product", new { id = Model.Id }, new { @class = "hidden-sm" })
+            </div>
+        </div>
+    </div>
+</div>

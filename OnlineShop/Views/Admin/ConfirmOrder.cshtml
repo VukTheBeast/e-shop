@@ -1,0 +1,158 @@
+﻿@model IList<OnlineShop.Models.OrderModel>
+
+@{
+    ViewBag.Title = "Order processing";
+    int counter = 1;
+    int counterSend = 1;
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<div class="manage-page">
+    <div class=" order-manager">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#tab1" data-toggle="tab">In progress</a>
+            </li>
+            <li>
+                <a href="#tab2" data-toggle="tab">Finished</a>
+            </li>
+        </ul>
+        <div class="tab-pane active" id="tab1">
+            @if (!Model.Any(x => x.IsNew))
+            {
+                <div class="no-item">
+                    There are no new orders
+                </div>
+            }
+            else
+            {
+                <table class="table table-hover ">
+                    <thead>
+                        <tr>
+                            <td style="width: 10%; text-align: center;">
+                                №
+                            </td>
+                            <td style="width: 10%;">
+                               User
+                            </td>
+                            <td style="width: 50%;">
+                                <div class=" align-left">
+                                   Ttitle
+                                </div>
+                                <div class="align-right price-title">
+                                    Price
+                                </div>
+                            </td>
+                            <td style="width: 15%; text-align: center;">
+                                Order Date
+                            </td>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model.Where(x => x.IsNew))
+                    {
+                        <tr>
+                            <td style="width: 10%; text-align: center; vertical-align: middle;">
+                                @(counter++)
+                            </td>
+                            <td style="width: 10%; vertical-align: middle">
+                                @Html.ActionLink(item.User,"OrderDetails","Admin",new{orderId=item.OrderId},new{})
+                            </td>
+                            <td style="width: 50%;">
+                                @foreach (var product in item.OrderItems)
+                                {
+                                    <div class="align-left">
+                                        @Html.ActionLink(product.Name, "Details", "Product", new { id = product.Id }, new { })
+                                    </div>
+                                    <div class="align-right">
+                                        @product.Count x $@product.Price
+                                    </div>
+                                    <br />
+                                }
+                            </td>
+                            <td style="width: 15%; text-align: center; vertical-align: middle;">
+                                @item.DateCreated.ToShortDateString()
+                            </td>
+                            <td style="width: 15%; text-align: center; vertical-align: middle;">
+                                @Html.ActionLink("Process", "ChangeOrderStatus", "Admin", new { orderId = item.OrderId }, new { })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+
+        </div>
+        <div class="tab-pane" id="tab2">
+            @if (!Model.Any(x => x.IsConfirm))
+            {
+                <div class="no-item">
+                    Execution of orders are absent
+                </div>
+            }
+            else
+            {
+                <table class="table table-hover table-condensed">
+                    <thead>
+                        <tr>
+                            <td style="width: 10%; text-align: center;">
+                                №
+                            </td>
+                            <td style="width: 10%;">
+                                User
+                            </td>
+                            <td style="width: 40%;">
+                                <div class=" align-left">
+                                    Title
+                                </div>
+                                <div class="align-right price-title">
+                                    Price
+                                </div>
+                            </td>
+                            <td style="width: 15%; text-align: center;">
+                                Order Date
+                            </td>
+                            <td style="width: 15%; text-align: center;">
+                                Dispatch date
+                            </td>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model.Where(x => x.IsConfirm))
+                    {
+                        <tr>
+                            <td style="width: 10%; text-align: center; vertical-align: middle">
+                                @(counterSend++)
+                            </td>
+                            <td style="width: 10%; vertical-align: middle">
+                                @Html.ActionLink(item.User, "OrderDetails", "Admin", new { orderId = item.OrderId }, new { })
+                            </td>
+                            <td style="width: 40%;">
+                                @foreach (var product in item.OrderItems)
+                                {
+                                    <div class="align-left">
+                                        @Html.ActionLink(product.Name, "Details", "Product", new { id = product.Id }, new { })
+                                    </div>
+                                    <div class="align-right">
+                                        @product.Count x $@product.Price
+                                    </div>
+                                    <br />
+                                }
+                            </td>
+                            <td style="width: 15%; text-align: center; vertical-align: middle">
+                                @item.DateCreated.ToShortDateString()
+                            </td>
+                            <td style="width: 15%; text-align: center; vertical-align: middle">
+                                @Convert.ToDateTime(item.DateSend).ToShortDateString()
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(".page-sidebar ul li").removeClass('active open');
+    $(".page-sidebar ul li a[href='/control/orders']").parent().parent().parent().addClass('active open');
+    $(".page-sidebar ul li a[href='/control/orders']").parent().addClass('active');
+</script>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3a76547242294ee0853a900f618f35e9" Name="Diagram1">
+        <EntityTypeShape EntityType="OnlineShopModel.Address" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.Category" Width="1.5" PointX="7.375" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.Membership" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.Order" Width="1.5" PointX="7.5" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.OrderProduct" Width="1.5" PointX="9.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.Product" Width="1.5" PointX="9.625" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.Role" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.User" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <AssociationConnector Association="OnlineShopModel.FK__Address__UserId__1A14E395" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Order_Address" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK__Product__Categor__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_webpages_Membership_User" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK__OrderProd__Order__1B0907CE" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK__Orders__UserId__1CF15040" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK__OrderProd__Produ__1BFD2C07" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.UsersInRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

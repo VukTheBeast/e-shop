@@ -1,0 +1,26 @@
+﻿@model OnlineShop.Logic.Entity.Product
+
+<div class="admin-product-item">
+    <div class="admin-product-photo">
+        <img src="@Model.Image" class="image" alt="a" />
+    </div>
+    <div class="admin-product-info">
+        <div class="admin-product-name">
+            @Model.Name
+        </div>
+        <div class="admin-product-price">
+            $@Model.Price
+        </div>
+        <div class="admin-product-button">
+            <a href="@Url.Action("UpdateProduct", "Admin", new { productId = Model.Id, returnUrl = Request.Url.PathAndQuery })">
+                <span class="glyphicon glyphicon-pencil"> </span>
+            </a>
+        </div>
+        <div class="admin-product-button">
+            <a href="@Url.Action("RemoveProduct", "Admin", new { productId = Model.Id,returnUrl= Request.Url.PathAndQuery })">
+                <span class="glyphicon glyphicon-trash"> </span>
+            </a>
+        </div>
+    </div>
+</div>
+

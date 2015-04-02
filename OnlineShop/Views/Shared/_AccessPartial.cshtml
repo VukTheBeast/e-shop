@@ -1,0 +1,29 @@
+﻿@model OnlineShop.Models.AccessModel
+@{
+    int count = 1;
+}
+<div class="admin-manager-access-item">
+    @using (Html.BeginForm("ChangeAccessUsers", "Admin", FormMethod.Post,new{id="access-form"}))
+    {
+        @Html.HiddenFor(x => x.Id)
+        @Html.HiddenFor(x=>x.Email)
+        <div class="access-item-count">
+            @*@(count++)*@
+        </div>
+        <div class="access-item-login">
+            @Model.Email
+        </div>
+        <div class="access-item-role">
+            @Html.DropDownList("Role", (IEnumerable<SelectListItem>)ViewBag.CategoryList)
+        </div>
+        <div class="access-item-btn">
+            <input type="submit" value="Save" class="btn btn-default" />
+            @*<a href="javascript:document.getElementById('access-form').submit()">
+                <span class="glyphicon glyphicon-floppy-disk"></span> 
+            </a>*@
+
+        </div>
+    }
+</div>
+
+

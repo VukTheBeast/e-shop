@@ -1,0 +1,70 @@
+﻿@model OnlineShop.Models.RegisterModel
+@{
+    ViewBag.Title = "Registration";
+}
+
+@*@using (Html.BeginForm())
+{
+    <div class="autorization-form">
+        <div class="account-title">Создание новой учетной записи</div>
+        <div class="message-error" id="error-message">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+        </div>
+        <div class="input-div">
+            <div class="input-div-left">
+                @Html.TextBoxFor(m => m.FirstName, new { @id = "first_name", @class = "form-control input-lg", @placeholder = "Name", @tabindex = "1" })
+            </div>
+            <div class="input-div-right">
+                @Html.TextBoxFor(m => m.LastName, new { @id = "last_name", @class = "form-control input-lg", @placeholder = "Last name", @tabindex = "2" })
+            </div>
+        </div>
+        <div class="input-div">
+            @Html.TextBoxFor(m => m.Email, new { @id = "email", @class = "form-control input-lg", @placeholder = "Email address", @tabindex = "3" })
+        </div>
+        <div class="input-div">
+            <div class="input-div-left">
+                @Html.PasswordFor(m => m.Password, new { @id = "password", @class = "form-control input-lg", @placeholder = "Password", @tabindex = "4" })
+            </div>
+            <div class="input-div-right">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @id = "password_confirmation", @class = "form-control input-lg", @placeholder = "Repeat password", @tabindex = "5" })
+            </div>
+        </div>
+        <div class="input-div">
+            <div class="btn-left">
+                <input type="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="6" />
+            </div>
+            <div class="btn-right">
+                @Html.ActionLink("Log in", "Login", "Account", new { }, new { @class = "btn btn-success btn-block btn-lg" })
+            </div>
+        </div>
+    </div>
+}*@
+
+
+<div class="col-sm-8 col-sm-offset-1">
+    <div class="signup-form">
+        <!--sign up form-->
+        <h2>New User Signup!</h2>
+        @using (Html.BeginForm())
+        {
+            
+            <div class="message-error" id="error-message">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary()
+            </div>
+            @Html.TextBoxFor(m => m.FirstName, new { @id = "first_name", @placeholder = "Name", @tabindex = "1" })
+    @Html.TextBoxFor(m => m.LastName, new { @id = "last_name", @placeholder = "Last name", @tabindex = "2" })
+            @Html.TextBoxFor(m => m.Email, new { @id = "email", @placeholder = "Email address", @tabindex = "3" })
+            @Html.PasswordFor(m => m.Password, new { @id = "password", @placeholder = "Password", @tabindex = "4" })
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @id = "password_confirmation", @placeholder = "Repeat password", @tabindex = "5" })
+            <span>
+
+            </span>
+            
+            <button type="submit" class="btn btn-default" style="display: inline;">Register</button>
+            @Html.ActionLink("Login", "Login", "Account", new { }, new { @class = "btn btn-success", @style = "border-radius:0;" })
+
+        }
+    </div>
+</div>

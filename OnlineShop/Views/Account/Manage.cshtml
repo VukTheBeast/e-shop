@@ -1,0 +1,27 @@
+﻿@model OnlineShop.Models.LocalPasswordModel
+@{
+    ViewBag.Title = "Change Password";
+}
+
+<div class="manage-page">
+    <div class="manage-nav-tabs">
+        <div class=" manage-nav-tabs-center">
+            <ul class="nav nav-pills">
+                <li>
+                    @Html.ActionLink("Shipping Address", "Address", "Manage")
+                </li>
+                <li>
+                    @Html.ActionLink("Orders", "Index", "Manage")
+                </li>
+                <li class="active">
+                    @Html.ActionLink("Change password", "Manage", "Account")
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    @Html.Partial("_ChangePasswordPartial")
+</div>
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

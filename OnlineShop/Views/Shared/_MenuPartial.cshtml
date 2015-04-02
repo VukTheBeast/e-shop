@@ -1,0 +1,37 @@
+﻿<li>
+    <a href=@Url.Action("ConfirmOrder", "Admin")>
+        <i class="fa fa-road"></i>
+        <span class="title">Order processing</span>
+
+    </a>
+</li>
+<li>
+    <a href=@Url.Action("ControlProducts", "Admin")>
+        <i class="fa fa-codepen"></i>
+        <span class="title">Management products</span>
+
+    </a>
+</li>
+
+@*<div class="menu-item">
+    @Html.ActionLink("Management products", "ControlProducts", "Admin", new { category = "All Products" }, new { })
+</div>*@
+
+@if (User.IsInRole("Admin"))
+{
+    <li>
+        <a href=@Url.Action("AccessUsers", "Admin")>
+            <i class="fa fa-users"></i>
+            <span class="title">Users</span>
+
+        </a>
+    </li>
+    <li>
+        <a href=@Url.Action("ControlCategory", "Admin")>
+            <i class="fa fa-university"></i>
+            <span class="title">Manage Categories</span>
+
+        </a>
+    </li>
+}
+

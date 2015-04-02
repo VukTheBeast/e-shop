@@ -1,0 +1,21 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_ErrorLayout.cshtml";
+}
+
+<div id="error-page">
+        <div id="error-img">
+            <img src="../../Images/error.png" />
+        </div>
+        <div id="error-title">
+            An error has occurred. <br/>
+            <span id="error-text">
+                Retry the operation again.
+            </span>
+        </div>
+        <div id="error-message">
+            @Model.Exception.Message
+        </div>
+    </div>

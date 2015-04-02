@@ -1,0 +1,27 @@
+﻿@model IEnumerable<OnlineShop.Models.AccessModel>
+
+@{
+    ViewBag.Title = "User access management";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<div class="admin-manager">
+    @if (!Model.Any())
+    {
+        <div class="no-item">
+            There are no users to display.
+        </div>
+    }
+    <div class="admin-manager-access">
+        @foreach (var value in Model)
+        {
+            Html.RenderPartial("_AccessPartial", value);
+        }
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(".page-sidebar ul li").removeClass('active open');
+    $(".page-sidebar ul li a[href='/control/access']").parent().parent().parent().addClass('active open');
+    $(".page-sidebar ul li a[href='/control/access']").parent().addClass('active');
+</script>

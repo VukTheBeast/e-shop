@@ -1,0 +1,62 @@
+﻿@using OnlineShop.Infrastructure
+@model OnlineShop.Models.ProductsListViewModel
+
+
+@{
+    ViewBag.Title = @Model.CurrentCategory;
+
+}
+<div class="item-page">
+
+    @if (!Model.Products.Any())
+    {
+        <div class="col-lg-12">
+           <h2 class="text-center">No item</h2>
+        </div>
+    }
+    <div class="item-list">        
+        <div class="col-lg-12">
+            @foreach (var p in Model.Products)
+            {
+                <div class="col-sm-4">
+                    <div class="product-image-wrapper">
+                        <div class="single-products">
+                            <div class="productinfo text-center">
+                                <img src=@p.Image alt="" />
+                                <h2>@p.Price <i class="fa fa-eur"></i></h2>
+                                <p>@p.Name</p>
+                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                            </div>
+                            <div class="product-overlay">
+                                <div class="overlay-content">
+                                    <h2>@p.Price <i class="fa fa-eur"></i></h2>
+                                    <p>@p.Name</p>
+                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    <a href="/item/@p.Id" class="btn btn-default add-to-cart"><i class="fa fa-info"></i>Details</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="choose">
+                            <ul class="nav nav-pills nav-justified">
+                                <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+                                <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+        @if (Model.PagingInfo.TotalPages > 1)
+        {
+            <div class="page-inform">
+                <div class="page-center">
+                    <ul class="pagination">
+                        @Html.PageLinks(Model.PagingInfo, x => Url.Action("Search", "Product",
+                     new { pages = x, category = Model.CurrentCategory, value = ViewBag.SearchValue }))
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+</div>

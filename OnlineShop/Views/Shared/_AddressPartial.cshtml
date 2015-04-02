@@ -1,0 +1,24 @@
+﻿@model OnlineShop.Logic.Entity.Address
+
+<div class="address-item">
+    <address>
+        @if (ViewBag.Edit != "true")
+        {
+            if (ViewBag.Order != "true")
+            {
+                @Html.RadioButtonFor(x => x.IsPrimary, Model.IsPrimary, new { id = Model.Id })
+            }
+        }
+        <strong>@Model.ContactName</strong><br />
+        @Model.Street<br />
+        @Model.City @Model.State @Model.PostalCode<br />
+        @Model.Country<br />
+        <abbr title="Телефон">Тел:</abbr> @Model.Telefon
+        @if (ViewBag.Edit == "true")
+        {
+            <a href="@Url.Action("EditAddress", "Manage", new { id = Model.Id })">
+                <span class="glyphicon glyphicon-pencil"> Редактировать</span>
+            </a>
+        }
+    </address>
+</div>

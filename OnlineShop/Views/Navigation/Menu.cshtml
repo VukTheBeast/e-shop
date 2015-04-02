@@ -1,0 +1,37 @@
+﻿@model IEnumerable<OnlineShop.Logic.Entity.Category>
+
+@{
+    Layout = null;
+}
+<div class="panel-group category-products" id="accordian">
+    @foreach (var cat in Model)
+    {
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordian" href=@("#"+cat.Name)>
+                    <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                    @cat.Name
+                </a>
+            </h4>
+        </div>
+
+    <div class="panel panel-default">
+        @{var dbContext = new OnlineShop.Logic.Entity.Context();
+        var products = dbContext.Products.Where(x => x.CategoryId == cat.Id);
+        }
+        @if (products.Count() > 0)
+        {
+            <div id="@cat.Name" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <ul>
+                        @foreach (var p in products)
+                        {
+                          <li><a href="/item/@p.Id">@p.Name</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+    }
+ </div>

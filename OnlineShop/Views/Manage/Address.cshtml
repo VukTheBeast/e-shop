@@ -1,0 +1,36 @@
+﻿@model IQueryable<OnlineShop.Logic.Entity.Address>
+
+<div class="manage-page">
+    <div class="manage-nav-tabs">
+        <div class="manage-nav-tabs-center">
+            <ul class="nav nav-pills">
+                <li class="active">
+                    @Html.ActionLink("Shipping Address", "Address", "Manage")
+                </li>
+                <li>
+                    @Html.ActionLink("Orders", "Index", "Manage")
+                </li>
+                <li>
+                    @Html.ActionLink("Change password", "Manage", "Account")
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="manage-page-title">
+        Delivery address
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="full alert alert-info">
+            A list of addresses is empty , please add the new address.
+        </div>
+    }
+    <div class="address-add">
+        @Html.ActionLink("Add the address", "EditAddress", "Manage", new { }, new { @class = "" })
+    </div>
+    @foreach (var address in Model)
+    {
+        Html.RenderPartial("_AddressPartial", address);
+    }
+</div>

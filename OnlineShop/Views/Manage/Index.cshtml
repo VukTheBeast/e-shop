@@ -1,0 +1,150 @@
+﻿@model IList<OnlineShop.Models.OrderModel>
+
+@{
+    ViewBag.Title = "Orders";
+    int counter = 1;
+    int counterSend = 1;
+}
+
+<div class="manage-page">
+    <div class="manage-nav-tabs">
+        <div class="manage-nav-tabs-center">
+            <ul class="nav nav-pills">
+                <li>
+                    @Html.ActionLink("Delivery Address", "Address", "Manage")
+                </li>
+                <li class="active">
+                    @Html.ActionLink("Order", "Index", "Manage")
+                </li>
+                <li>
+                    @Html.ActionLink("Change password", "Manage", "Account")
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="manage-page-title">
+        Order
+    </div>
+    <div class=" order-manager">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#tab1" data-toggle="tab">In progress</a>
+            </li>
+            <li>
+                <a href="#tab2" data-toggle="tab">Finished</a>
+            </li>
+        </ul>
+        <div class="tab-pane active" id="tab1">
+
+
+            <table class="table table-hover ">
+                <thead>
+                    <tr>
+                        <td style="width: 10%; text-align: center;">
+                            №
+                        </td>
+                        <td style="width: 50%;">
+                            <div class=" align-left">
+                                Name
+                            </div>
+                            <div class="align-right price-title">
+                                Price
+                            </div>
+                        </td>
+                        <td style="width: 20%; text-align: center;">
+                            Order date
+                        </td>
+                        <td style="width: 20%; text-align: center;">
+                            In total
+                        </td>
+                    </tr>
+                </thead>
+                @foreach (var item in Model.Where(x => x.IsProcess))
+                {
+                    <tr>
+                        <td style="width: 10%; text-align: center; vertical-align: middle;">
+                            @(counter++)
+                        </td>
+                        <td style="width: 50%;">
+                            @foreach (var product in item.OrderItems)
+                            {
+                                <div class="align-left">
+                                    @Html.ActionLink(product.Name, "Details", "Product", new { id = product.Id }, new { })
+                                </div>
+                                <div class="align-right">
+                                    @product.Count x $@product.Price
+                                </div>
+                                <br />
+                            }
+                        </td>
+                        <td style="width: 20%; text-align: center; vertical-align: middle;">
+                            @item.DateCreated.ToShortDateString()
+                        </td>
+                        <td style="width: 20%; text-align: center; vertical-align: middle;">
+                            $@item.ComputeTotalValue()
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="tab-pane" id="tab2">
+            <table class="table table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <td style="width: 10%; text-align: center;">
+                            №
+                        </td>
+                        <td style="width: 35%;">
+                            <div class=" align-left">
+                                Name
+                            </div>
+                            <div class="align-right price-title">
+                                Price
+                            </div>
+                        </td>
+                        <td style="width: 20%; text-align: center;">
+                            Order date
+                        </td>
+                        <td style="width: 20%; text-align: center;">
+                            Shipment date
+                        </td>
+                        <td style="width: 15%; text-align: center;">
+                            In total
+                        </td>
+
+                    </tr>
+                </thead>
+                @foreach (var item in Model.Where(x => x.IsConfirm))
+                {
+                    <tr>
+                        <td style="width: 10%; text-align: center; vertical-align: middle">
+                            @(counterSend++)
+                        </td>
+                        <td style="width: 35%;">
+                            @foreach (var product in item.OrderItems)
+                            {
+                                <div class="align-left">
+                                    @Html.ActionLink(product.Name, "Details", "Product", new { id = product.Id }, new { })
+                                </div>
+                                <div class="align-right">
+                                    @product.Count x $@product.Price
+                                </div>
+                                <br />
+                            }
+                        </td>
+                        <td style="width: 20%; text-align: center; vertical-align: middle">
+                            @item.DateCreated.ToShortDateString()
+                        </td>
+                        <td style="width: 20%; text-align: center; vertical-align: middle">
+                            @Convert.ToDateTime(item.DateSend).ToShortDateString()
+                        </td>
+                        <td style="width: 15%; text-align: center; vertical-align: middle;">
+                            $@item.ComputeTotalValue()
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/bundles/bootstrap")

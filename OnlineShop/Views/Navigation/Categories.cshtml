@@ -1,0 +1,26 @@
+﻿@model IEnumerable<string>
+
+@{
+    Layout = null;
+}
+
+
+
+@foreach (var link in Model)
+{
+    <li>
+        @Html.RouteLink(link,
+        new
+        {
+            controller = "Admin",
+            action = "ControlProducts",
+            category = link,
+            page = 1
+        },
+        new
+        {
+            @class = link == (TempData["cat"] == null ? "" : TempData["cat"].ToString()) ? "active open" : null
+        }
+    )
+    </li>
+}

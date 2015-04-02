@@ -1,0 +1,101 @@
+﻿@model OnlineShop.Models.CartCheckoutViewModel
+
+@{
+    ViewBag.Title = "Forming the order";
+    int counter = 1;
+    int addressId = 1;
+}
+
+
+<div class="cart">
+    <div class="stepwizard">
+        <div class="stepwizard-row">
+            <div class="stepwizard-step">
+                <button type="button" class="btn-default btn-circle">1</button>
+                <p> Shopping Cart</p>
+            </div>
+            <div class="stepwizard-step">
+                <button type="button" class="btn-primary btn-circle">2</button>
+                <p>Forming the order</p>
+            </div>
+            <div class="stepwizard-step">
+                <button type="button" class="btn-default btn-circle" disabled="disabled">3</button>
+                <p>Order</p>
+            </div>
+        </div>
+    </div>
+    @*@using (Html.BeginForm("Order", "Cart", FormMethod.Post))
+        {*@
+    <div class="order-center-content">
+        <div class="order-address-list">
+            @foreach (var address in Model.Address)
+            {
+                Html.RenderPartial("_AddressPartial", address);
+            }
+            @if (!Model.Address.Any())
+            {
+                <div class="well">
+                    fill in the address of delivery management
+                </div>
+            }
+        </div>
+    </div>
+    <div class="order-center-content">
+        <div class="order-item-list">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <td>
+                            №
+                        </td>
+                        <td>
+                            Name
+                        </td>
+                        <td>Amount</td>
+                        <td>
+                            Price
+                        </td>
+                    </tr>
+                </thead>
+                @foreach (var line in Model.Cart.Lines)
+                {
+                    <tr>
+                        <td>
+                            @(counter++)
+                        </td>
+                        <td>
+                            @line.Product.Name
+                        </td>
+                        <td>
+                            @line.Quantity
+                        </td>
+                        <td>
+                            @line.Product.Price
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div class="panel-footer">
+                <div class="row text-center">
+                    <div class="col-xs-9">
+                        <h4 class="text-right">Only: <strong>$@Model.Cart.ComputeTotalValue()</strong></h4>
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="submit" id="btn-continue" class="btn btn-success btn-block" value="Resume" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#btn-continue').click(function () {
+                var value = $('input[name="IsPrimary"]:checked').attr('id');
+                if (value > 0) {
+                    document.location.href = "@(Url.Action("Order", "Cart"))?addressId=" + value;
+                }
+            });
+        });
+    </script>
+    @*}*@
+</div>

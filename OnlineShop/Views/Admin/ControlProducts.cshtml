@@ -1,0 +1,67 @@
+﻿@model OnlineShop.Models.ProductsListViewModel
+
+@{
+    ViewBag.Title = "Admin";
+    string value = "";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+
+}
+
+<div class="row">   
+
+    @if (!Model.Products.Any())
+    {
+        <div class="no-item">
+            In this category, no products.
+        </div>
+    }
+    <div class="admin-product-item-list">
+        <div class="col-lg-12">
+          
+            @foreach (var p in Model.Products)
+            {
+                <div class="col-sm-3">
+                    <div class="product-image-wrapper">
+                        <div class="single-products">
+                            <div class="productinfo text-center">
+                                <img src=@p.Image alt="" width="220" height="220" style="padding:15px;" />
+                                <h4>@p.Price <i class="fa fa-eur"></i></h4>
+                                <p>@p.Name</p>
+                                <div style="padding-bottom:10px;">
+
+                                    <a href="@Url.Action("UpdateProduct", "Admin", new { productId = p.Id, returnUrl = Request.Url.PathAndQuery })" class="btn btn-info add-to-cart">
+                                        <i class="fa fa-pencil-square-o"></i>Edit
+                                    </a>
+                                    <a href="@Url.Action("RemoveProduct", "Admin", new { productId = p.Id,returnUrl= Request.Url.PathAndQuery })" class="btn btn-danger add-to-cart">
+                                        <i class="fa fa-trash"></i>Delete                                        
+                                    </a>                                                                       
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             
+            }
+        </div>
+        <div class="col-lg-12">
+            @if (Model.PagingInfo.TotalPages > 1)
+            {
+                <div class="page-inform">
+                    <div class="page-center">
+                        <ul class="pagination">
+                            @Html.PageLinks(Model.PagingInfo, x => Url.Action("ControlProducts", "Admin",
+                            new { page = x, category = Model.CurrentCategory }))
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(".page-sidebar ul li").removeClass('active open');
+    $(".page-sidebar ul li a[href='/control/products']").parent().parent().parent().addClass('active open');
+    $(".page-sidebar ul li a[href='/control/products']").parent().addClass('active');
+</script>

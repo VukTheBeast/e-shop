@@ -1,0 +1,88 @@
+﻿@model OnlineShop.Logic.Entity.Product
+
+
+           
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+@{
+    ViewBag.Title = "Update Item";
+    if (Model.Id == 0)
+    {
+        ViewBag.Title = "Adding Product";
+
+    }
+    string returnUrl = ViewBag.ReturnUrl;
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<div class="admin-manager-update">
+    @using (Html.BeginForm("UpdateProduct", "Admin", FormMethod.Post,
+    new { enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(x=>x.Id)
+        @Html.HiddenFor(x=>x.Image)
+        @Html.HiddenFor(x=>returnUrl)
+        <div class="admin-manager-image-content">
+            @if (Model.Image == null)
+            {
+                <img class="image" src="../../Images/Items/default.jpg" />
+            }
+            @if (Model.Image != "")
+            {
+                <img class="image" src="@Model.Image" />
+            }
+            <div class="admin-manager-image-load">
+                <input class="btn btn-add" type="file" name="Image" />
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="product-item">
+                <div class="product-name">
+                    Title
+                </div>
+                <div class="product-value">
+                    @Html.TextBoxFor(x => x.Name, new {@class="form-control", @style="width:200px;" })
+                </div>
+                <div class="product-error">
+                    @Html.ValidationMessageFor(x => x.Name)
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-name">
+                    Description
+                </div>
+                <div class="product-value">
+                    @Html.TextAreaFor(x => x.Description, new { @class = "form-control", @style="width:350px;" })
+                </div>
+                <div class="product-error">
+                    @Html.ValidationMessageFor(x => x.Description)
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-name">
+                    Price
+                </div>
+                <div class="product-value">
+                    @Html.EditorFor(x => x.Price)
+                </div>
+                <div class="product-error">
+                    @Html.ValidationMessageFor(x => x.Price)
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-name">
+                    Category
+                </div>
+                <div class="product-value">
+                    @Html.DropDownList("CategoryId", (IEnumerable<SelectListItem>)ViewBag.CategoryList, new {@class="form-control", @style="width:200px;" })
+                </div>
+            </div>
+            <div class="product-save" style="padding-top:15px;">
+                <input class="btn btn-info" type="submit" value="Save" />
+            </div>
+        </div>
+    }
+</div>

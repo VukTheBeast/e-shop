@@ -1,0 +1,33 @@
+﻿@model OnlineShop.Logic.Entity.Product
+
+@{
+    ViewBag.Title = Model.Name;
+}
+<div class="product-detail">
+      <div class="detail-name">
+            <h3 class="text-center">@Model.Name</h3> 
+        </div>
+    <div class="detail-image">
+        <img src="@Model.Image" class="image" alt="a" />
+    </div>
+     <h4>Price: @Model.Price<i class="fa fa-eur"></i></h4>
+    <div class="page-header">      
+        <div style="border-width: 0px 0px 0px 3px ; border-style: solid; padding-left: 5px; border-color: #777; margin-bottom:20px;">
+            @Model.Description
+        </div> 
+      
+        <div class="detail-add">
+            @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+            {
+                <span class="glyphicon glyphicon-pencil"></span>
+                @Html.ActionLink("Update", "UpdateProduct", "Admin", new { productId = Model.Id, returnUrl = Request.Url.PathAndQuery }, new { })
+            }
+            else
+            {
+                <a href="@Url.Action("AddToCart", "Cart", new { Model.Id, returnUrl = Request.Url.PathAndQuery })" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+            }
+        </div>
+
+    </div>
+
+</div>

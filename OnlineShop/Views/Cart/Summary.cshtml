@@ -1,0 +1,8 @@
+﻿@model OnlineShop.Models.Cart
+
+@{
+    Layout = null;
+}
+<li><a href=@Url.Action("Index", "Cart", new { returnUrl = Request.Url.PathAndQuery }) id="cart-link"><i class="fa fa-shopping-cart"></i> Cart: @Model.Lines.Sum(x => x.Quantity) | @Model.ComputeTotalValue() € </a></li>
+
+@*@Html.ActionLink("Cart: " + Model.Lines.Sum(x => x.Quantity) + "   €" + Model.ComputeTotalValue(), "Index", "Cart", new { returnUrl = Request.Url.PathAndQuery }, new { @id = "cart-link" })*@

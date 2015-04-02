@@ -1,0 +1,253 @@
+﻿@model OnlineShop.Models.CartIndexViewModel
+
+@{
+    ViewBag.Title = "Shopping Cart";
+}
+
+@*<div class="cart">
+        <div class="stepwizard">
+            <div class="stepwizard-row">
+                <div class="stepwizard-step">
+                    <button type="button" class="btn-primary btn-circle">1</button>
+                    <p> Shopping Cart</p>
+                </div>
+                <div class="stepwizard-step">
+                    <button type="button" class="btn-default btn-circle">2</button>
+                    <p>Forming the order</p>
+                </div>
+                <div class="stepwizard-step">
+                    <button type="button" class="btn-default btn-circle" disabled="disabled">3</button>
+                    <p>Order</p>
+                </div>
+            </div>
+        </div>
+        <div class="cart-main">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <h5><span class="glyphicon glyphicon-shopping-cart"></span>Shopping Cart</h5>
+                            </div>
+                            <div class="col-xs-4">
+                                <a class="btn btn-primary btn-sm btn-block" href="@Model.ReturnUrl">
+                                    <span class="glyphicon glyphicon-share-alt"> </span> Continue shopping
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    @foreach (var line in Model.Cart.Lines)
+                    {
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <img class="img-responsive" src="@line.Product.Image">
+                            </div>
+                            <div class="col-xs-4 row-margin-top">
+                                <h4 class="product-name"><strong>@line.Product.Name</strong></h4>
+                            </div>
+                            <div class="col-xs-6 row-margin-top">
+                                <div class="col-xs-6 text-right cart-margin">
+                                    <strong>@line.Product.Price <span class="text-muted">x</span></strong>
+                                </div>
+                                <div class="col-xs-2">
+                                    <a class="btn btn-link " href="@Url.Action("AddToCart", "Cart", new { line.Product.Id, Model.ReturnUrl })">
+                                        <span class="glyphicon glyphicon-plus"> </span>
+                                    </a>
+                                </div>
+                                <div class="col-xs-2 text-center cart-margin">
+                                    @line.Quantity
+                                </div>
+                                <div class="col-xs-2">
+                                    <a class="btn btn-link" href="@Url.Action("RemoveFromCart", "Cart", new { ProductId = line.Product.Id, Model.ReturnUrl })">
+                                        <span class="glyphicon glyphicon-trash"> </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    }
+                    @if (!Model.Cart.Lines.Any())
+                    {
+                        <div class="row">
+                            <div class="text-center">
+                                Cart is empty
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="panel-footer">
+                    <div class="row text-center">
+                        <div class="col-xs-9">
+                            <h4 class="text-right">Всего: <strong>$@Model.Cart.ComputeTotalValue()</strong></h4>
+                        </div>
+                        <div class="col-xs-3">
+                            @Html.ActionLink("Resume", "Checkout", "Cart", new { }, new { @class = "btn btn-success btn-block" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+
+<section id="cart_items">
+    <div class="container">
+        @*<div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li>
+                    <a class="btn btn-primary btn-sm btn-block" href="@Model.ReturnUrl">
+                        <span class="glyphicon glyphicon-share-alt"> </span> Continue shopping
+                    </a>
+                </li>
+                <li><a href="@Model.ReturnUrl"> Continue shopping</a></li>
+                <li class="active">Shopping Cart</li>
+            </ol>
+        </div>*@
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <h5><span class="glyphicon glyphicon-shopping-cart"></span>Shopping Cart</h5>
+                        </div>
+                        <div class="col-xs-4">
+                            <a class="btn btn-primary btn-sm btn-block" href="@Model.ReturnUrl">
+                                <span class="glyphicon glyphicon-share-alt"> </span> Continue shopping
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr class="cart_menu">
+                            <td class="image">Item</td>
+                            <td class="description"></td>
+                            <td class="price">Price</td>
+                            <td class="quantity">Quantity</td>
+                            <td class="total">Total</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var line in Model.Cart.Lines)
+                        {
+                            <tr>
+                                <td class="cart_product">
+                                    <a href=""><img class="img-responsive" style="width:111px; height:111px" src="@line.Product.Image" alt=""></a>
+                                    @*<a href=""><img src="images/cart/one.png" alt=""></a>*@
+                                </td>
+                                <td class="cart_description">
+                                    <h4><a href="">@line.Product.Name</a></h4>
+                                    <p></p> @*ovde bi iso description*@
+                                </td>
+                                <td class="cart_price">
+                                    <p>@line.Product.Price</p>
+                                </td>
+                                <td class="cart_quantity">
+                                    <div class="cart_quantity_button">
+                                        <a class="cart_quantity_up" style="margin-left: 25%;" href="@Url.Action("AddToCart", "Cart", new { line.Product.Id, Model.ReturnUrl })"> + </a>
+                                        <input class="cart_quantity_input" type="text" name="quantity" value="@line.Quantity" autocomplete="off" size="2">
+                                        <a class="cart_quantity_down" href="@Url.Action("RemoveFromCart", "Cart", new { ProductId = line.Product.Id, Model.ReturnUrl })"> - </a>
+                                    </div>
+                                </td>
+                                <td class="cart_total">
+                                    @{
+                                        int price = line.Product.Price;
+                                        int quantity =int.Parse(line.Quantity.ToString());
+                                        int total = price * quantity;
+                                    }    
+                                    <p class="cart_total_price">@total $</p>
+                                    
+                                </td>
+                                <td class="cart_delete">
+                                    @*<a class="cart_quantity_delete" href="@Url.Action("RemoveFromCart", "Cart", new { ProductId = line.Product.Id, Model.ReturnUrl })"><i class="fa fa-times"></i></a>*@
+                                    <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+                                </td>
+                            </tr>
+                            @*<div class="row">
+                                <div class="col-xs-2">
+                                    <img class="img-responsive" src="@line.Product.Image">
+                                </div>
+                                <div class="col-xs-4 row-margin-top">
+                                    <h4 class="product-name"><strong>@line.Product.Name</strong></h4>
+                                </div>
+                                <div class="col-xs-6 row-margin-top">
+                                    <div class="col-xs-6 text-right cart-margin">
+                                        <strong>@line.Product.Price <span class="text-muted">x</span></strong>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a class="btn btn-link " href="@Url.Action("AddToCart", "Cart", new { line.Product.Id, Model.ReturnUrl })">
+                                            <span class="glyphicon glyphicon-plus"> </span>
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-2 text-center cart-margin">
+                                        @line.Quantity
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a class="btn btn-link" href="@Url.Action("RemoveFromCart", "Cart", new { ProductId = line.Product.Id, Model.ReturnUrl })">
+                                            <span class="glyphicon glyphicon-trash"> </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>*@
+                        }
+                        @if (!Model.Cart.Lines.Any())
+                        {
+                            <tr>
+                                <td class="cart_product">
+                                    Cart is empty
+                                </td>
+                                <td class="cart_description"></td>
+                                <td class="cart_price"></td>
+                                <td class="cart_quantity"></td>
+                                <td class="cart_total"></td>
+                                <td class="cart_delete"></td>
+                            </tr>
+
+                        }
+                        @*<tr>
+                            <td class="cart_product">
+                                <a href=""><img src="images/cart/one.png" alt=""></a>
+                            </td>
+                            <td class="cart_description">
+                                <h4><a href="">Colorblock Scuba</a></h4>
+                                <p>Web ID: 1089772</p>
+                            </td>
+                            <td class="cart_price">
+                                <p>$59</p>
+                            </td>
+                            <td class="cart_quantity">
+                                <div class="cart_quantity_button">
+                                    <a class="cart_quantity_up" href=""> + </a>
+                                    <input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
+                                    <a class="cart_quantity_down" href=""> - </a>
+                                </div>
+                            </td>
+                            <td class="cart_total">
+                                <p class="cart_total_price">$59</p>
+                            </td>
+                            <td class="cart_delete">
+                                <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+                            </td>
+                        </tr>*@
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</section>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        //zbog stila da bude u sredini, i da se lepo formatira tabela
+        $('section').children('div.container').removeClass('container');
+        $('section').css('padding-left', '15%');
+
+    });
+</script>

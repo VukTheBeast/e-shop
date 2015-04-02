@@ -1,0 +1,81 @@
+﻿@model OnlineShop.Models.CartCheckoutViewModel
+
+@{
+    ViewBag.Title = "Order";
+    int counter = 1;
+}
+
+<div class="cart">
+    <div class="stepwizard">
+        <div class="stepwizard-row">
+            <div class="stepwizard-step">
+                <button type="button" class="btn-default btn-circle">1</button>
+                <p> Shopping Cart</p>
+            </div>
+            <div class="stepwizard-step">
+                <button type="button" class="btn-default btn-circle">2</button>
+                <p>Forming the order</p>
+            </div>
+            <div class="stepwizard-step">
+                <button type="button" class="btn-primary btn-circle">3</button>
+                <p>Order</p>
+            </div>
+        </div>
+    </div>
+    <div class="order-center-content">
+        <div class="order-address-list">
+            @foreach (var address in Model.Address)
+            {
+                Html.RenderPartial("_AddressPartial", address);
+            }
+        </div>
+    </div>
+    <div class="order-center-content">
+        <div class="order-item-list">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <td>
+                            №
+                        </td>
+                        <td>
+                            Name
+                        </td>
+                        <td>Amount</td>
+                        <td>
+                            Price
+                        </td>
+                    </tr>
+                </thead>
+                @foreach (var line in Model.Cart.Lines)
+                {
+                    <tr>
+                        <td>
+                            @(counter++)
+                        </td>
+                        <td>
+                            @line.Product.Name
+                        </td>
+                        <td>
+                            @line.Quantity
+                        </td>
+                        <td>
+                            @line.Product.Price
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div class="panel-footer">
+                <div class="row text-center">
+                    <div class="col-xs-9">
+                        <h4 class="text-right">Total: <strong>$@Model.Cart.ComputeTotalValue()</strong></h4>
+                    </div>
+                    <div class="col-xs-3">
+                        @Html.ActionLink("Confirm order", "OrderConfirm", "Cart", new { }, new { @class = "btn btn-success btn-block" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

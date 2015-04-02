@@ -1,0 +1,45 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <text>
+        <div class="logon-user">
+            Здравствуйте,
+            @{
+    var httpCookie = Request.Cookies["UserName"];
+            }
+            @if (httpCookie != null)
+            {
+                if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                {
+                    @Html.ActionLink(Server.UrlDecode(httpCookie.Value) + ".", "ControlProducts", "Admin", new { category = "All Products" }, htmlAttributes: new { @class = "username", title = "Management" })
+                }
+                else
+                {
+                    @Html.ActionLink(Server.UrlDecode(httpCookie.Value) + ".", "Index", "Manage", routeValues: null, htmlAttributes: new { @class = "username", title = "Management" })
+                }
+            }
+        </div>
+        <div class="logon-logout">
+            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
+            }
+        </div>
+        @if(User.IsInRole("User"))
+        {
+            <div class="cart-info">
+                @{Html.RenderAction("Summary", "Cart");}
+            </div>
+        }
+
+    </text>
+}
+else
+{
+    <div class="login-register">
+        @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+    </div>
+    <div class="login">
+        @Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+    </div>
+}

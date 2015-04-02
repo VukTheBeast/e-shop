@@ -1,0 +1,297 @@
+﻿<!DOCTYPE html>
+@{
+     string value = "";
+}
+<html lang="en">
+
+<head>
+<meta charset="utf-8"/>
+<title>Admin Panel</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta content="" name="description"/>
+<meta content="" name="Dejan Gavrilovic"/>
+<style>
+    .active{
+        background-color:#1CAF9A;
+    }
+</style>
+<link href="~/Content/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/Admin/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Admin/uniform.default.css" rel="stylesheet" />
+    <link href="~/Content/Admin/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" />
+    <link href="~/Content/Admin/components.css" rel="stylesheet" />
+    <link href="~/Content/Admin/plugins.css" rel="stylesheet" />
+    <link href="~/Content/Admin/layout.css" rel="stylesheet" />
+    <link href="~/Content/Admin/darkblue.css" rel="stylesheet" />
+    <link href="~/Content/Admin/custom.css" rel="stylesheet" />
+    <link href="~/Content/Admin/datatable/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/Admin/bootstrap-toastr/toastr.min.js"></script>
+  
+
+
+
+<!-- END THEME STYLES -->
+<link rel="shortcut icon" href="favicon.ico"/>
+</head>
+<body class="page-header-fixed page-quick-sidebar-over-content">
+<!-- BEGIN HEADER -->
+<div class="page-header navbar navbar-fixed-top">
+	<!-- BEGIN HEADER INNER -->
+	<div class="page-header-inner">
+	
+		<a href="javascript:;" class = "menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+		</a>
+		<!-- END RESPONSIVE MENU TOGGLER -->
+		<!-- BEGIN TOP NAVIGATION MENU -->		
+		<div class="top-menu">
+			<ul class="nav navbar-nav pull-right">
+			<li>
+			<h4 style="color:white;">@User.Identity.Name</h4>
+			</li>
+				<li class="dropdown dropdown-quick-sidebar-toggler">
+                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @*<a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>*@
+                        <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-toggle" title="Logout">
+                            <i class="icon-logout"></i>
+                        </a>
+                    }
+                    @*<a href="/logoff" class="dropdown-toggle" title="Logout">
+                        <i class="icon-logout"></i>
+                    </a>*@
+				</li>
+				<!-- END QUICK SIDEBAR TOGGLER -->
+			</ul>
+		</div>
+		<!-- END TOP NAVIGATION MENU -->
+	</div>
+	<!-- END HEADER INNER -->
+</div>
+<!-- END HEADER -->
+<div class="clearfix">
+</div>
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+	<!-- BEGIN SIDEBAR -->
+	<div class="page-sidebar-wrapper">
+		<div class="page-sidebar navbar-collapse collapse">			
+			<ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+				<!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+				<li class="sidebar-toggler-wrapper">
+					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+					<div class="sidebar-toggler">
+					</div>
+					<!-- END SIDEBAR TOGGLER BUTTON -->
+				</li>
+                    @{ Html.RenderAction("Categories", "Navigation");}
+				@*<li>
+					<a href="javascript:;">
+					<i class="fa fa-home"></i>
+					<span class="title">Homepage</span>
+					
+					</a>
+					<ul class="sub-menu"> 
+    					<li>
+        					<a href="/admin/homepage">
+            					<i class="fa fa-home"></i>
+            					<span class="title">Edit</span>    					
+        					</a>    					
+    					</li>    					   				   
+						<li>
+							<a href="/admin/sliders">
+								<i class="fa fa-plus"></i>								
+								Sliders
+							</a>
+						</li>
+					</ul>		
+				</li>*@
+				@*<li>
+					<a href="javascript:;">
+					<i class="icon-docs"></i>
+					<span class="title">Pages <span class="badge badge-info">Broj</span></span>
+					<span class="arrow "></span>
+					</a>
+					<ul class="sub-menu">
+    				    <li>
+					       <h4 style="padding-left:20px; color: cadetblue;"><i class="fa fa-file-text"></i> Text Pages</h4>
+				        </li>					
+						<li>
+							<a href="/textpage/addtextpage">
+								<i class="fa fa-plus"></i>								
+								New text page
+							</a>
+						</li>
+						<li>
+							<a href="/textpage/alltextpages">
+								<i class="fa fa-list"></i>
+								<span class="badge badge-info">Broj</span>
+								All text pages
+							</a>
+						</li>
+						<li>
+					       <h4 style="padding-left:20px; color: cadetblue;"><i class="fa fa-camera"></i> Galery</h4>
+				        </li>
+						<li>
+							<a href="/galery/newgalery">
+							<i class="fa fa-plus"></i>
+							<span class="badge badge-info">Broj</span>
+							All Galeries</a>
+						</li>
+
+					</ul>
+				</li>*@
+			    @*<li>
+					<a href="/admin/allmenu">
+					<i class="fa fa-sitemap"></i>
+					<span class="title">Menu</span>
+					
+					</a>		
+				</li>*@
+				<li>
+					<a href="javascript:;">
+					<i class="fa fa-users"></i>
+					<span class="title">Users</span>
+					<span class="arrow "></span>
+					</a>
+					<ul class="sub-menu">
+						<li>
+							<a href="/admin/adduser">
+							<i class="fa fa-plus"></i>
+							Add user  </a>							
+						</li>
+						<li>
+							<a href="/admin/allusers">
+							<i class="fa fa-list"></i>All users <span class="badge badge-info">Broj</span> </a>
+						</li>
+<!-- 						<li> -->
+<!-- 							<a href="login_3.html"> -->
+<!-- 							Login Form 3</a> -->
+<!-- 						</li> -->
+<!-- 						<li> -->
+<!-- 							<a href="login_soft.html"> -->
+<!-- 							Login Form 4</a> -->
+<!-- 						</li> -->
+<!-- 						<li> -->
+<!-- 							<a href="extra_lock.html"> -->
+<!-- 							Lock Screen 1</a> -->
+<!-- 						</li> -->
+<!-- 						<li> -->
+<!-- 							<a href="extra_lock2.html"> -->
+<!-- 							Lock Screen 2</a> -->
+<!-- 						</li> -->
+					</ul>
+				</li>
+				<li class="heading">
+					<h3 class="uppercase">Management</h3>
+				</li>
+                   @Html.Partial("_MenuPartial")
+
+				@*<li>
+					<a href="javascript:;">
+					<i class="fa fa-user"></i>
+					<span class="title">Profile</span>
+					<span class="arrow "></span>
+					</a>
+					<ul class="sub-menu">
+						<li>
+							<a href="/admin/updateprofile">
+							Update Profile</a>
+						</li>
+						<li>
+							<a href="/admin/changepassword">
+							Change Password</a>
+						</li>
+<!-- 						<li> -->
+<!-- 							<a href="quick_sidebar_over_content_transparent.html"> -->
+<!-- 							Over Content & Transparent</a> -->
+<!-- 						</li> -->
+<!-- 						<li> -->
+<!-- 							<a href="quick_sidebar_on_boxed_layout.html"> -->
+<!-- 							Boxed Layout</a> -->
+<!-- 						</li> -->
+					</ul>
+				</li>*@
+
+			</ul>
+			<!-- END SIDEBAR MENU -->
+		</div>
+	</div>
+	<!-- END SIDEBAR -->
+	<!-- BEGIN CONTENT -->
+	<div class="page-content-wrapper">
+		<div class="page-content">
+			<div class="row">
+				<div class="col-md-12"> 
+                    <div class="col-lg-12 page-header">
+                        <div class="col-lg-8">
+                            @Html.ActionLink("Add new product", "UpdateProduct", "Admin", new { productId = 0, returnUrl = Request.Url.PathAndQuery }, new { @class = "btn btn-primary" })
+                        </div>
+                        <div class="col-lg-4 align-right">
+                            @using (Html.BeginForm("Search", "Admin", FormMethod.Post))
+                            {
+
+                                @Html.TextBoxFor(x =>value , new { @class = "form-control", @placeholder = "Search products" })
+                                @*<input class="btn btn-default" type="submit" value="Search" />*@
+
+                            }
+                        </div>
+
+                    </div>
+					 @RenderBody()
+				</div>
+			</div>
+			<!-- END PAGE CONTENT-->
+		</div>
+	</div>
+	<!-- END CONTENT -->
+	<!-- BEGIN QUICK SIDEBAR -->
+<!-- 	logout namesti ovde -->
+	<a href="javascript:;" class="page-quick-sidebar-toggler"><i class="icon-close"></i></a> 
+	<!-- END QUICK SIDEBAR -->
+</div>
+<!-- END CONTAINER -->
+<!-- BEGIN FOOTER -->
+<div class="page-footer">
+	<div class="page-footer-inner">
+		 2015 &copy; Admin panel
+	</div>
+	<div class="scroll-to-top">
+		<i class="icon-arrow-up"></i>
+	</div>
+</div>
+    <script src="~/Content/Admin/jquery-migrate.min.js"></script>
+<!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+    <script src="~/Content/Admin/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Content/Admin/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+    <script src="~/Content/Admin/jquery.slimscroll.min.js"></script>
+    <script src="~/Content/Admin/jquery.blockui.min.js"></script>
+    <script src="~/Content/Admin/jquery.cokie.min.js"></script>
+    <script src="~/Content/Admin/jquery.uniform.min.js"></script>
+    <link href="~/Content/Admin/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" />
+
+    <script src="~/Content/Admin/metronic.js"></script>
+    <script src="~/Content/Admin/layout.js"></script>
+    <script src="~/Content/Admin/quick-sidebar.js"></script>
+    <link href="~/Content/Admin/datatable/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/Content/Admin/bootstrap-toastr/toastr.min.js"></script>
+
+<script>
+    jQuery(document).ready(function() {    
+    Metronic.init(); // init metronic core components
+    Layout.init(); // init current layout
+    QuickSidebar.init(); // init quick sidebar
+
+
+      });
+   </script>
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>
