@@ -3,31 +3,29 @@
 @{
     ViewBag.Title = Model.Name;
 }
-<div class="product-detail">
-      <div class="detail-name">
-            <h3 class="text-center">@Model.Name</h3> 
-        </div>
-    <div class="detail-image">
-        <img src="@Model.Image" class="image" alt="a" />
+<div class="product-details">
+    <!--product-details-->
+    <div class="col-sm-5">
+        <div class="view-product">
+            <img src="@Model.Image" alt="">           
+        </div>    
     </div>
-     <h4>Price: @Model.Price<i class="fa fa-eur"></i></h4>
-    <div class="page-header">      
-        <div style="border-width: 0px 0px 0px 3px ; border-style: solid; padding-left: 5px; border-color: #777; margin-bottom:20px;">
-            @Model.Description
-        </div> 
-      
-        <div class="detail-add">
-            @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
-            {
-                <span class="glyphicon glyphicon-pencil"></span>
-                @Html.ActionLink("Update", "UpdateProduct", "Admin", new { productId = Model.Id, returnUrl = Request.Url.PathAndQuery }, new { })
-            }
-            else
-            {
+    <div class="col-sm-7">
+        <div class="product-information">
+            <!--/product-information-->          
+            <h2>@Model.Name</h2>
+            @*<p>Web ID: @Model.Id</p>*@          
+            <span>
+                <span>@Model.Price<i class="fa fa-eur"></i></span>
+                @*<label>Quantity:</label>
+                <input value="3" type="text">*@
                 <a href="@Url.Action("AddToCart", "Cart", new { Model.Id, returnUrl = Request.Url.PathAndQuery })" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-            }
-        </div>
-
+            </span>
+            @*<p><b>Availability:</b> In Stock</p>
+            <p><b>Condition:</b> New</p>*@
+            <p><b>Brand:</b> @Model.Category.Name</p>
+            <p><b>Description:</b> @Model.Description</p>
+            <a href=""><img src="/Image/images/product-details/share.png" class="share img-responsive" alt=""></a>
+        </div><!--/product-information-->
     </div>
-
 </div>
