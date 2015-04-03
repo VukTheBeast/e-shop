@@ -1,0 +1,33 @@
+﻿@model OnlineShop.Models.PayPalModel
+
+<body>
+    <form id="hiddenform" action=@Model.actionURL>
+    @Html.HiddenFor(model => model.cmd)
+    @Html.HiddenFor(model => model.business)
+    @Html.HiddenFor(model => model.no_shipping)
+    @Html.HiddenFor(model => model.@return)
+    @Html.HiddenFor(model => model.cancel_return)
+    @Html.HiddenFor(model => model.notify_url)
+    @Html.HiddenFor(model => model.currency_code)
+    @Html.HiddenFor(model => model.item_name)
+    @Html.HiddenFor(model => model.amount)
+    @Html.HiddenFor(model => model.quantity)
+
+        
+    </form>
+
+    <p style="text-align: center">
+        <h3>
+            Connecting to Paypal , please wait ...
+
+        </h3>
+    </p>
+</body>
+ @Scripts.Render("~/bundles/jquery")
+
+<script type="text/javascript" language="javascript">
+    $(this.document).ready(function () {
+        var form = $("form");
+        form.submit();
+    });   
+</script>

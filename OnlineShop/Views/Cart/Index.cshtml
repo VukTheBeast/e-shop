@@ -93,18 +93,23 @@
 
 
 <section id="cart_items">
-    <div class="container">
-        @*<div class="breadcrumbs">
-            <ol class="breadcrumb">
-                <li>
-                    <a class="btn btn-primary btn-sm btn-block" href="@Model.ReturnUrl">
-                        <span class="glyphicon glyphicon-share-alt"> </span> Continue shopping
-                    </a>
-                </li>
-                <li><a href="@Model.ReturnUrl"> Continue shopping</a></li>
-                <li class="active">Shopping Cart</li>
-            </ol>
-        </div>*@
+    <div class="stepwizard">
+        <div class="stepwizard-row">
+            <div class="stepwizard-step">
+                <button type="button" class="btn-primary btn-circle" style="background-color:#FE980F;">1</button>
+                <p> Shopping Cart</p>
+            </div>
+            <div class="stepwizard-step">
+                <button type="button" class="btn-default btn-circle">2</button>
+                <p>Forming the order</p>
+            </div>
+            <div class="stepwizard-step">
+                <button type="button" class="btn-default btn-circle">3</button>
+                <p>Order</p>
+            </div>
+        </div>
+    </div>
+    <div class="container">  
         <div class="panel panel-info">
             <div class="panel-heading">
                 <div class="panel-title">
@@ -169,33 +174,7 @@
                                     <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
                                 </td>
                             </tr>
-                            @*<div class="row">
-                                <div class="col-xs-2">
-                                    <img class="img-responsive" src="@line.Product.Image">
-                                </div>
-                                <div class="col-xs-4 row-margin-top">
-                                    <h4 class="product-name"><strong>@line.Product.Name</strong></h4>
-                                </div>
-                                <div class="col-xs-6 row-margin-top">
-                                    <div class="col-xs-6 text-right cart-margin">
-                                        <strong>@line.Product.Price <span class="text-muted">x</span></strong>
-                                    </div>
-                                    <div class="col-xs-2">
-                                        <a class="btn btn-link " href="@Url.Action("AddToCart", "Cart", new { line.Product.Id, Model.ReturnUrl })">
-                                            <span class="glyphicon glyphicon-plus"> </span>
-                                        </a>
-                                    </div>
-                                    <div class="col-xs-2 text-center cart-margin">
-                                        @line.Quantity
-                                    </div>
-                                    <div class="col-xs-2">
-                                        <a class="btn btn-link" href="@Url.Action("RemoveFromCart", "Cart", new { ProductId = line.Product.Id, Model.ReturnUrl })">
-                                            <span class="glyphicon glyphicon-trash"> </span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>*@
+                 
                         }
                         @if (!Model.Cart.Lines.Any())
                         {
@@ -211,34 +190,20 @@
                             </tr>
 
                         }
-                        @*<tr>
-                            <td class="cart_product">
-                                <a href=""><img src="images/cart/one.png" alt=""></a>
-                            </td>
-                            <td class="cart_description">
-                                <h4><a href="">Colorblock Scuba</a></h4>
-                                <p>Web ID: 1089772</p>
-                            </td>
-                            <td class="cart_price">
-                                <p>$59</p>
-                            </td>
-                            <td class="cart_quantity">
-                                <div class="cart_quantity_button">
-                                    <a class="cart_quantity_up" href=""> + </a>
-                                    <input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-                                    <a class="cart_quantity_down" href=""> - </a>
-                                </div>
-                            </td>
-                            <td class="cart_total">
-                                <p class="cart_total_price">$59</p>
-                            </td>
-                            <td class="cart_delete">
-                                <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                            </td>
-                        </tr>*@
+                      
 
                     </tbody>
                 </table>
+                <div class="panel-footer">
+                    <div class="row text-center">
+                        <div class="col-xs-9">
+                            <h4 class="text-right">Total: <strong>$@Model.Cart.ComputeTotalValue()</strong></h4>
+                        </div>
+                        <div class="col-xs-3">
+                            @Html.ActionLink("Next", "Checkout", "Cart", new { }, new { @class = "btn btn-success btn-block" })
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 </section>

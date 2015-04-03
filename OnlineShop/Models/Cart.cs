@@ -39,6 +39,16 @@ namespace OnlineShop.Models
         {
             return lineCollection.Sum(e => e.Product.Price*e.Quantity);
         }
+        public string ItemsName()
+        {
+            string names="";
+            foreach (var item in lineCollection)
+            {
+                names += "[" +item.Product.Name+ "]" + System.Environment.NewLine;
+            }
+            return names;
+            //return lineCollection.Sum(e => e.Product.Price * e.Quantity);
+        }
 
         public void Clear()
         {

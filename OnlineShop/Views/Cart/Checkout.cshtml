@@ -7,11 +7,11 @@
 }
 
 
-<div class="cart">
+<div class="row">
     <div class="stepwizard">
         <div class="stepwizard-row">
             <div class="stepwizard-step">
-                <button type="button" class="btn-default btn-circle">1</button>
+               <a href="@Url.Action("Index", "Cart", new { returnUrl = Request.Url.PathAndQuery })"><button type="button" class="btn-default btn-circle">1</button></a>
                 <p> Shopping Cart</p>
             </div>
             <div class="stepwizard-step">
@@ -26,7 +26,7 @@
     </div>
     @*@using (Html.BeginForm("Order", "Cart", FormMethod.Post))
         {*@
-    <div class="order-center-content">
+    <div class="col-lg-12">
         <div class="order-address-list">
             @foreach (var address in Model.Address)
             {
@@ -40,7 +40,7 @@
             }
         </div>
     </div>
-    <div class="order-center-content">
+    <div class="col-lg-12">
         <div class="order-item-list">
             <table class="table table-hover">
                 <thead>
@@ -75,18 +75,57 @@
                     </tr>
                 }
             </table>
+            @using (Html.BeginForm("ValidateCommand", "PayPal"))
+            {
+                <div style="display:none;">
+                    <table>
+                        <tr>
+                            <td>
+                                product Name:
+                            </td>
+                            <td>
+                                <input type="text" name="product" value="@Model.Cart.ItemsName()" readonly />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Total Price:
+                            </td>
+                            <td>
+                                <input type="text" name="totalPrice" value="@Model.Cart.ComputeTotalValue()" readonly />eur
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Quantity:
+                            </td>
+                            <td>
+                                <input type="text" name="quantity" value="@Model.Cart.Lines.Count()" readonly />eur
+                            </td>
+                        </tr>
+                        @*<tr>
+                            <td></td>
+                            <td>
+                                <input type="submit" name="btnConfirm" value="Check Out with Paypal" />
+                            </td>
+                        </tr>*@
+                    </table>
+                </div>
+            
             <div class="panel-footer">
                 <div class="row text-center">
                     <div class="col-xs-9">
                         <h4 class="text-right">Only: <strong>$@Model.Cart.ComputeTotalValue()</strong></h4>
                     </div>
                     <div class="col-xs-3">
-                        <input type="submit" id="btn-continue" class="btn btn-success btn-block" value="Resume" />
+                        <input type="submit" id="btn-continue" class="btn btn-success btn-block" value="Finish" />
                     </div>
                 </div>
             </div>
+          }
         </div>
     </div>
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('#btn-continue').click(function () {

@@ -14,7 +14,7 @@
     @*@Scripts.Render("~/bundles/modernizr")*@
     @*@Scripts.Render("~/bundles/bootstrap")*@
     @*@Scripts.Render("~/bundles/jquery")*@
-
+    
     <link href="~/Content/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Content/prettyPhoto.css" rel="stylesheet" />
     <link href="~/Content/price-range.css" rel="stylesheet" />
@@ -22,39 +22,6 @@
     <link href="~/Content/main.css" rel="stylesheet" />
     <link href="~/Content/responsive.css" rel="stylesheet" />
 </head>
-@*<body>
-    <div class="page">
-        <div class="header">
-            <div class="logo">
-                <a href="@Url.Action("List", "Product")">
-                    <img src="../../Images/logo.png">
-                </a>
-            </div>
-            <div class="header-login">
-                <div id="login">
-                    @Html.Partial("_LoginPartial")
-                </div>
-            </div>
-        </div>
-        <div class="menu">
-            @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
-            {
-                @Html.Partial("_MenuPartial")
-            }
-            else
-            {
-                Html.RenderAction("Menu", "Navigation");
-            }    
-        </div>
-        <div class="content">
-            @RenderBody()
-        </div>
-        <div class="footer">
-            <p>&copy; @DateTime.Now.Year — OnlineShop</p>
-        </div>
-    </div>
-    @RenderSection("scripts", required: false)
-</body>*@
 <body>
     <header id="header">
         <!--header-->

@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
-
+//NotifyFromPaypal
 namespace OnlineShop
 {
     public class RouteConfig
@@ -8,6 +8,34 @@ namespace OnlineShop
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.MapRoute(null,
+                   "PayPal/ValidateCommand",
+                   new
+                   {
+                       controller = "PayPal",
+                       action = "ValidateCommand"
+              
+                   }
+           );
+            routes.MapRoute(null,
+                "redirectpaypal",
+                new
+                {
+                    controller = "PayPal",
+                    action = "RedirectFromPaypal"
+
+                }
+        );
+            routes.MapRoute(null,
+           "notifypaypal",
+           new
+           {
+               controller = "PayPal",
+               action = "NotifyFromPaypal"
+
+               }
+         );
+
 
             routes.MapRoute(null,
                 "", // Only matches the empty URL (i.e. /)
@@ -182,6 +210,7 @@ namespace OnlineShop
                     id = UrlParameter.Optional
                 }
                 );
+      
 
             routes.MapRoute("Default", "{controller}/{action}/{id}",
                 new {controller = "Product", action = "List", id = UrlParameter.Optional}

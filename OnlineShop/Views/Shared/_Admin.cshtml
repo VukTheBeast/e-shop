@@ -233,13 +233,19 @@
                             @Html.ActionLink("Add new product", "UpdateProduct", "Admin", new { productId = 0, returnUrl = Request.Url.PathAndQuery }, new { @class = "btn btn-primary" })
                         </div>
                         <div class="col-lg-4 align-right">
-                            @using (Html.BeginForm("Search", "Admin", FormMethod.Post))
+                            @*@using (Html.BeginForm("Search", "Admin", FormMethod.Post))
                             {
 
                                 @Html.TextBoxFor(x =>value , new { @class = "form-control", @placeholder = "Search products" })
-                                @*<input class="btn btn-default" type="submit" value="Search" />*@
+                                @*<input class="btn btn-default" type="submit" value="Search" />
 
-                            }
+                            }*@
+
+                            <form action="/control/product/search/1" method="post">
+
+                                @Html.TextBoxFor(x => value, new { @class = "form-control", @placeholder = "Search products" })
+
+                            </form>
                         </div>
 
                     </div>
